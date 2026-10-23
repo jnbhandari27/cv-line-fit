@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>LineFit User Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#f5f6f8; --surface:#ffffff; --surface-2:#f0f2f5; --line:#e2e5ea;
+  --ink:#151a22; --muted:#5d6675; --faint:#8a93a1;
+  --accent:#3053d1; --accent-ink:#ffffff; --accent-soft:#e9eefc;
+  --fit:#17803f; --fit-soft:#e6f5ec; --edge:#b25e09; --edge-soft:#fdf1df; --over:#cf3227; --over-soft:#fdebe9;
+  --shadow:0 1px 2px rgba(16,24,40,.05),0 1px 3px rgba(16,24,40,.06);
+  --ui:"Geist",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --num:"Geist Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1015; --surface:#151920; --surface-2:#1b2029; --line:#262c36;
+  --ink:#e7eaf0; --muted:#9aa3b2; --faint:#6f7886;
+  --accent:#86a0ff; --accent-ink:#0d1015; --accent-soft:#1d2540;
+  --fit:#4cc97a; --fit-soft:#14301f; --edge:#f2b04a; --edge-soft:#382a13; --over:#ff7b70; --over-soft:#3b1b19;
+  --shadow:0 1px 2px rgba(0,0,0,.4); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d1015; --surface:#151920; --surface-2:#1b2029; --line:#262c36;
+  --ink:#e7eaf0; --muted:#9aa3b2; --faint:#6f7886;
+  --accent:#86a0ff; --accent-ink:#0d1015; --accent-soft:#1d2540;
+  --fit:#4cc97a; --fit-soft:#14301f; --edge:#f2b04a; --edge-soft:#382a13; --over:#ff7b70; --over-soft:#3b1b19;
+  --shadow:0 1px 2px rgba(0,0,0,.4); color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--ui);-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top-in{max-width:880px;margin:0 auto;height:56px;display:flex;align-items:center;gap:12px;padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+.back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:600;margin-right:auto}
+.back svg{width:18px;height:18px}
+.btn{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 12px;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 .84rem var(--ui);cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--surface-2)}
+.btn svg{width:16px;height:16px}
+main{max-width:880px;margin:0 auto;padding:28px max(16px,env(safe-area-inset-right,0px)) 56px max(16px,env(safe-area-inset-left,0px));display:grid;gap:22px}
+h1{font-size:1.9rem;line-height:1.15;letter-spacing:-.02em;margin:0;font-weight:700;text-wrap:balance}
+h2{font-size:1.2rem;margin:0;letter-spacing:-.01em;font-weight:650}
+h3{font-size:1rem;margin:0;font-weight:650}
+.lede{color:var(--muted);margin:6px 0 0;font-size:1.02rem;max-width:62ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;display:grid;gap:12px;min-width:0}
+.pick{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.tag{display:inline-block;font:600 .7rem/1 var(--ui);letter-spacing:.05em;text-transform:uppercase;padding:5px 8px;border-radius:6px;background:var(--accent-soft);color:var(--accent)}
+.tag.free{background:var(--fit-soft);color:var(--fit)}
+.tag.paid{background:var(--edge-soft);color:var(--edge)}
+.head{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.head h2{margin-right:auto}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s;display:grid;gap:10px}
+ol.steps li{counter-increment:s;position:relative;padding-left:40px;min-height:28px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:8px;background:var(--accent-soft);color:var(--accent);font:600 .85rem/28px var(--num);text-align:center}
+code,.mono{font:500 .86em var(--num);background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+.pc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.pc div{background:var(--surface-2);border-radius:10px;padding:10px 12px}
+.pc b{display:block;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}
+.pc .pro b{color:var(--fit)} .pc .con b{color:var(--over)}
+.pc ul{margin:0;padding-left:18px;color:var(--muted);font-size:.9rem}
+.note{font-size:.88rem;color:var(--muted);background:var(--surface-2);border-radius:10px;padding:10px 12px;margin:0}
+.warn{font-size:.88rem;background:var(--edge-soft);color:var(--ink);border-radius:10px;padding:10px 12px;margin:0}
+.warn b{color:var(--edge)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.9rem}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600}
+.yes{color:var(--fit);font-weight:600} .no{color:var(--over);font-weight:600}
+.toc{display:flex;flex-wrap:wrap;gap:8px}
+.toc a{text-decoration:none;font-size:.88rem;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;color:var(--ink)}
+.toc a:hover{border-color:var(--accent)}
+dl{margin:0;display:grid;gap:10px}
+dt{font-weight:600}
+dd{margin:2px 0 0;color:var(--muted)}
+.small{font-size:.82rem;color:var(--faint)}
+.legend{display:grid;gap:8px}
+.lg{display:flex;gap:10px;align-items:flex-start}
+.sw{flex:none;width:12px;height:12px;border-radius:4px;margin-top:6px}
+.kbd{font:500 .8em var(--num);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;background:var(--surface)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.mini{background:var(--surface-2);border-radius:10px;padding:12px 14px}
+.mini h3{margin-bottom:4px}
+.mini p{margin:0;color:var(--muted);font-size:.9rem}
+ul.clean{margin:0;padding-left:20px;display:grid;gap:6px}
+ul.clean li{color:var(--ink)}
+ul.clean li span{color:var(--muted)}
+p{margin:0}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>Back to LineFit</a>
+  <button class="btn" id="themeBtn" type="button"><svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></svg><span id="themeLbl">Dark mode</span></button>
+</div></header>
+
+<main>
+  <section>
+    <h1>LineFit user guide</h1>
+    <p class="lede">Everything LineFit can do, in plain words. LineFit shows whether each CV point fits on one Superset line and helps you fix the ones that don't, by hand or with AI.</p>
+  </section>
+
+  <section class="card pick">
+    <div class="head"><h2>Quick start</h2><span class="tag">2 minutes</span></div>
+    <ol class="steps">
+      <li><b>Pick your section</b> at the top: Experience &amp; internship, PoR · Projects · ECA · CCA, or Spikes ribbon.</li>
+      <li><b>Paste your points</b> in the left box, one point per line. Bold words the way they are in your CV.</li>
+      <li><b>Read the colour</b> of each result: green fits, amber is borderline, red is too long.</li>
+      <li><b>Fix it</b> by editing the text, or click the <b>AI button</b> on a point to rewrite it.</li>
+      <li><b>Click Copy text</b> and paste it into Superset. The bold comes with it.</li>
+    </ol>
+    <div class="toc">
+      <a href="#sections">Sections</a><a href="#writing">Typing and pasting</a><a href="#results">Reading the results</a><a href="#superset">Checking in Superset</a><a href="#copy">Copying to Superset</a><a href="#ai">AI rewrite</a><a href="#setup">Setting up AI</a><a href="#ribbon">Spikes ribbon</a><a href="#guides">CV guides</a><a href="#privacy">Your data</a><a href="#faq">Questions</a>
+    </div>
+  </section>
+
+  <section class="card" id="sections">
+    <div class="head"><h2>1. Sections</h2></div>
+    <p>Each part of the CV has its own line length, so pick the right section before you paste. Your text is kept when you switch.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Section</th><th>Use it for</th><th>Green up to</th><th>Red after</th></tr></thead>
+      <tbody>
+        <tr><td><b>Experience &amp; internship</b></td><td>Work experience and summer internship points</td><td>469.4 pt (99.5% of the line)</td><td>471.8 pt</td></tr>
+        <tr><td><b>PoR · Projects · ECA · CCA</b></td><td>Positions of responsibility, projects, extra- and co-curricular points (the rows with a year column)</td><td>432.1 pt (99%)</td><td>436.5 pt</td></tr>
+        <tr><td><b>Spikes ribbon</b></td><td>The highlights ribbon at the top of the CV</td><td>563 pt</td><td>566.5 pt</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small">"pt" (points) is the unit Superset's PDF uses for width. You don't need to know it: the colours tell you what to do.</p>
+  </section>
+
+  <section class="card" id="writing">
+    <div class="head"><h2>2. Typing and pasting points</h2></div>
+    <ul class="clean">
+      <li><b>One point per line.</b> <span>Press Enter to start a new point. Each line gets its own result card.</span></li>
+      <li><b>Bold:</b> <span>select words and press <span class="kbd">Ctrl</span> + <span class="kbd">B</span> (<span class="kbd">⌘</span> + <span class="kbd">B</span> on a Mac), or click the <b>B Bold</b> button. Do the same again to unbold. Bold text is wider, so bold your CV exactly as it will appear.</span></li>
+      <li><b>Pasting keeps bold</b> <span>from Superset, Word, Google Docs and AI chats. Text marked with **double asterisks** turns into bold automatically.</span></li>
+      <li><b>Small things are handled for you:</b> <span>a bullet at the start (•, - or *) is ignored, and repeated spaces count as one, just like Superset.</span></li>
+      <li><b>Examples</b> <span>loads three sample points: one short, one that fits, one too long. <b>Clear</b> empties the box.</span></li>
+      <li><b>Your text is saved</b> <span>in your browser, so it's still there when you come back on the same device.</span></li>
+    </ul>
+  </section>
+
+  <section class="card" id="results">
+    <div class="head"><h2>3. Reading the results</h2></div>
+    <p>Each point gets a card on the right. It updates as you type.</p>
+    <div class="legend">
+      <div class="lg"><span class="sw" style="background:var(--fit)"></span><div><b>Fits (green)</b><p style="color:var(--muted)">Sits on one line. "Room" tells you how much more you could add, in pt and roughly in characters.</p></div></div>
+      <div class="lg"><span class="sw" style="background:var(--edge)"></span><div><b>Borderline (amber)</b><p style="color:var(--muted)">Right at the edge. It often fits, but check it once in Superset, or trim a character to make it green.</p></div></div>
+      <div class="lg"><span class="sw" style="background:var(--over)"></span><div><b>Too long (red)</b><p style="color:var(--muted)">It will wrap onto a second line. The card says how much to cut, in pt and roughly in characters.</p></div></div>
+    </div>
+    <div class="grid2">
+      <div class="mini"><h3>The preview</h3><p>Your point is drawn at its real width in the CV font. The dashed line is the end of the line; any words past it turn red.</p></div>
+      <div class="mini"><h3>The bar</h3><p>Green shows how full the line is, amber is the borderline zone, and red is how far the point runs past the line.</p></div>
+      <div class="mini"><h3>The numbers</h3><p>Width in pt and as a % of the line. Around 98 to 99% is a nicely full line.</p></div>
+      <div class="mini"><h3>The summary</h3><p>Above the cards: how many points fit, are borderline or are too long.</p></div>
+    </div>
+  </section>
+
+  <section class="card" id="superset">
+    <div class="head"><h2>4. Checking in Superset, and teaching LineFit your CV</h2></div>
+    <p>Column widths can differ slightly between CVs, so amber and red cards ask <b>"Checked it in Superset?"</b> After you try the point in Superset:</p>
+    <ul class="clean">
+      <li><b>It fit on one line</b> <span>tells LineFit your CV has a bit more room. Its limits move up to match.</span></li>
+      <li><b>It wrapped</b> <span>tells LineFit your line is shorter. Its limits move down.</span></li>
+      <li><span>Once you've used these, the top of the results says <b>"your limits"</b>. You can also type limits yourself, or go back to the defaults, under <b>How the measurement works</b> at the bottom of the page.</span></li>
+    </ul>
+  </section>
+
+  <section class="card" id="copy">
+    <div class="head"><h2>5. Copying into Superset</h2></div>
+    <p>Click <b>Copy text</b> on a card, then paste into the matching Superset field. The bold comes with it. If your browser or Superset drops the bold, re-bold those words in Superset.</p>
+  </section>
+
+  <section class="card" id="ai">
+    <div class="head"><h2>6. AI rewrite</h2><span class="tag">Optional</span></div>
+    <p>Each card has an AI button. The main part does the suggested action for that point; the <b>▾</b> next to it shows all four options.</p>
+    <div class="grid2">
+      <div class="mini"><h3>Enlarge</h3><p>Makes a short point longer so it fills the line, without adding new facts.</p></div>
+      <div class="mini"><h3>Shrink</h3><p>Makes a long point shorter so it fits, without dropping numbers or key facts.</p></div>
+      <div class="mini"><h3>Improve wording</h3><p>Stronger verb, clearer action → method → result, same facts, same length.</p></div>
+      <div class="mini"><h3>Alternatives</h3><p>The same facts told from different angles, for example leading with the result or the method.</p></div>
+    </div>
+    <h3 style="margin-top:4px">In the AI window</h3>
+    <ol class="steps">
+      <li><b>Check the mode</b> at the top. You can switch between the four at any time.</li>
+      <li><b>Optional: add facts</b> in "Facts the AI may add", such as team size, tool or time frame. The AI uses only these and what's already in your point.</li>
+      <li><b>Automatic tab</b> (needs a key, see <a href="#setup">Setting up AI</a>): click <b>Write options</b>. LineFit asks the AI for 5 versions, measures each one, and tries up to 3 rounds until some land on target. <b>Stop</b> cancels.</li>
+      <li><b>Copy-paste tab</b> (no key needed): click <b>Copy prompt</b>, paste it into ChatGPT, Gemini, Claude or any AI chat, then paste the AI's whole answer back into the box. Every version is measured instantly. If none fit, <b>Copy follow-up prompt</b> tells the AI exactly how far off each one was.</li>
+      <li><b>Pick a result.</b> Options marked <b>On target</b> fill the line without going over. Click <b>Use this</b> to replace your point, or <b>Copy</b> to copy it.</li>
+    </ol>
+    <ul class="clean">
+      <li><b>Undo rewrite</b> <span>(under your points) brings back your original text.</span></li>
+      <li><b>New-number warning:</b> <span>if an option contains a number that isn't in your point or your facts, it's flagged. Only use it if the number is true.</span></li>
+      <li><b>Target width:</b> <span>the AI aims just under the amber zone: about 98.3 to 99.5% of the line for Experience &amp; internship, and 98 to 99% for PoR · Projects · ECA · CCA.</span></li>
+      <li><b>Always read the result.</b> <span>AI can make mistakes. Every word on your CV should be something you can explain in an interview.</span></li>
+    </ul>
+  </section>
+
+  <section class="card" id="setup">
+    <div class="head"><h2>7. Setting up AI</h2></div>
+    <ol class="steps">
+      <li>Get a free key. The <a href="api-key-guide.html">2-minute key guide</a> shows exactly how. Google Gemini is the easiest. <b>Use your personal Gmail, not your college email</b>: college accounts often can't create Gemini keys.</li>
+      <li>Click <b>Set up AI</b> at the top right, choose your provider and paste the key.</li>
+      <li>Click <b>Test key</b>. "Key works" means you're ready, and the top button changes to show your AI.</li>
+    </ol>
+    <ul class="clean">
+      <li><b>Remember my key on this device</b> <span>keeps the key in your browser so you don't paste it again. Leave it off on shared computers.</span></li>
+      <li><b>Follow the CV guides' rules</b> <span>(on by default) adds the main rules from the FMS CV guides to every AI request: strong past-tense verbs, action → method → result, no invented or rounded-up numbers, plain English.</span></li>
+      <li><b>Model</b> <span>is picked for you. Change it only if you know which one you want; <b>Test key</b> lists the ones your key can use.</span></li>
+    </ul>
+  </section>
+
+  <section class="card" id="ribbon">
+    <div class="head"><h2>8. Spikes ribbon</h2></div>
+    <ul class="clean">
+      <li><b>One spike per box,</b> <span>the way you enter them in Superset. Each box shows its width. <b>Add a spike</b> adds a box, and <b>✕</b> removes one.</span></li>
+      <li><b>The preview</b> <span>shows your ribbon at real size: dark bar, white bold text and dividers. Text that runs off the ends turns red.</span></li>
+      <li><b>The whole ribbon is bold, and every space counts</b> <span>(unlike the points, where repeated spaces count once).</span></li>
+      <li><b>Spread evenly with spaces</b> <span>adds the same number of spaces beside every divider to fill spare room neatly. <b>Copy</b> next to a spike then copies it with those spaces.</span></li>
+      <li><b>Tip from the CV guides:</b> <span>the 1st, 3rd and 5th spikes catch the eye most, so put your strongest ones there.</span></li>
+    </ul>
+  </section>
+
+  <section class="card" id="guides">
+    <div class="head"><h2>9. CV writing guides</h2></div>
+    <p>Open <b>Help &amp; guides</b> at the top right to read the two FMS guides as PDFs: <b>The CV Prompt Bus</b> (ready-made prompts for writing and checking points with any AI) and <b>Fantastic CVs and How to Build Them</b> (the rules for strong, defensible points). The same menu links to the AI key guide and this user guide.</p>
+  </section>
+
+  <section class="card" id="privacy">
+    <div class="head"><h2>10. Your data, and other settings</h2></div>
+    <ul class="clean">
+      <li><b>Your points stay in your browser.</b> <span>LineFit has no server and stores nothing. When you use AI, the point goes straight from your browser to the AI provider you chose.</span></li>
+      <li><b>Light or dark mode:</b> <span>the page follows your device. Use the button at the top right to switch, and it remembers your choice.</span></li>
+      <li><b>Tips strip:</b> <span>close it with ✕; it stays hidden on that device.</span></li>
+    </ul>
+    <p class="note"><b>Disclaimer:</b> widths are calculated, not taken from Superset. They are estimates for the Superset CV template (Calibri 10 pt), and Superset's final layout can differ, so check amber points once in Superset before you finalise. LineFit is not affiliated with Superset or any AI provider.</p>
+  </section>
+
+  <section class="card" id="faq">
+    <div class="head"><h2>11. Questions</h2></div>
+    <dl>
+      <div><dt>A point shows green but wrapped in Superset.</dt><dd>Click <b>It wrapped</b> on an amber card next time, or lower "Fits up to" under How the measurement works. LineFit will then match your CV.</dd></div>
+      <div><dt>Why does bolding a word change the width?</dt><dd>Bold letters are wider. Bold the same words as in your CV so the measurement matches.</dd></div>
+      <div><dt>I can't create a Gemini key.</dt><dd>You're probably using your college email. Switch to your personal Gmail on the key page and try again.</dd></div>
+      <div><dt>The AI button says I need a key.</dt><dd>Use the <b>Copy-paste</b> tab, which works with any AI chat, or set up a free key with the <a href="api-key-guide.html">key guide</a>.</dd></div>
+      <div><dt>The AI's options are all too short or too long.</dt><dd>Click <b>Write more options</b>, or add real facts in "Facts the AI may add" so it has more to work with when enlarging.</dd></div>
+      <div><dt>Can I use LineFit on my phone?</dt><dd>Yes. Everything works on a phone; editing is easiest on a laptop.</dd></div>
+    </dl>
+  </section>
+</main>
+<script>
+(function(){
+  var ICON={light:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',dark:'<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>'};
+  var root=document.documentElement,KEY="linefit:theme",saved=null;
+  try{saved=localStorage.getItem(KEY)}catch(e){}
+  if(saved==="light"||saved==="dark")root.setAttribute("data-theme",saved);
+  function current(){var t=root.getAttribute("data-theme");if(t)return t;return window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}
+  function paint(){var c=current(),next=c==="dark"?"light":"dark";document.getElementById("themeIcon").innerHTML=ICON[next];document.getElementById("themeLbl").textContent=next==="dark"?"Dark mode":"Light mode";document.getElementById("themeBtn").setAttribute("aria-label","Switch to "+next+" mode")}
+  document.getElementById("themeBtn").addEventListener("click",function(){var next=current()==="dark"?"light":"dark";root.setAttribute("data-theme",next);try{localStorage.setItem(KEY,next)}catch(e){}paint()});
+  if(window.matchMedia)matchMedia("(prefers-color-scheme: dark)").addEventListener("change",paint);
+  paint();
+})();
+</script>
+</body>
+</html>

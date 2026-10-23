@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Get a Free AI Key · LineFit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#f5f6f8; --surface:#ffffff; --surface-2:#f0f2f5; --line:#e2e5ea;
+  --ink:#151a22; --muted:#5d6675; --faint:#8a93a1;
+  --accent:#3053d1; --accent-ink:#ffffff; --accent-soft:#e9eefc;
+  --fit:#17803f; --fit-soft:#e6f5ec; --edge:#b25e09; --edge-soft:#fdf1df; --over:#cf3227; --over-soft:#fdebe9;
+  --shadow:0 1px 2px rgba(16,24,40,.05),0 1px 3px rgba(16,24,40,.06);
+  --ui:"Geist",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --num:"Geist Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1015; --surface:#151920; --surface-2:#1b2029; --line:#262c36;
+  --ink:#e7eaf0; --muted:#9aa3b2; --faint:#6f7886;
+  --accent:#86a0ff; --accent-ink:#0d1015; --accent-soft:#1d2540;
+  --fit:#4cc97a; --fit-soft:#14301f; --edge:#f2b04a; --edge-soft:#382a13; --over:#ff7b70; --over-soft:#3b1b19;
+  --shadow:0 1px 2px rgba(0,0,0,.4); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d1015; --surface:#151920; --surface-2:#1b2029; --line:#262c36;
+  --ink:#e7eaf0; --muted:#9aa3b2; --faint:#6f7886;
+  --accent:#86a0ff; --accent-ink:#0d1015; --accent-soft:#1d2540;
+  --fit:#4cc97a; --fit-soft:#14301f; --edge:#f2b04a; --edge-soft:#382a13; --over:#ff7b70; --over-soft:#3b1b19;
+  --shadow:0 1px 2px rgba(0,0,0,.4); color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--ui);-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top-in{max-width:880px;margin:0 auto;height:56px;display:flex;align-items:center;gap:12px;padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+.back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:600;margin-right:auto}
+.back svg{width:18px;height:18px}
+.btn{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 12px;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 .84rem var(--ui);cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--surface-2)}
+.btn svg{width:16px;height:16px}
+main{max-width:880px;margin:0 auto;padding:28px max(16px,env(safe-area-inset-right,0px)) 56px max(16px,env(safe-area-inset-left,0px));display:grid;gap:22px}
+h1{font-size:1.9rem;line-height:1.15;letter-spacing:-.02em;margin:0;font-weight:700;text-wrap:balance}
+h2{font-size:1.2rem;margin:0;letter-spacing:-.01em;font-weight:650}
+h3{font-size:1rem;margin:0;font-weight:650}
+.lede{color:var(--muted);margin:6px 0 0;font-size:1.02rem;max-width:62ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;display:grid;gap:12px;min-width:0}
+.pick{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.tag{display:inline-block;font:600 .7rem/1 var(--ui);letter-spacing:.05em;text-transform:uppercase;padding:5px 8px;border-radius:6px;background:var(--accent-soft);color:var(--accent)}
+.tag.free{background:var(--fit-soft);color:var(--fit)}
+.tag.paid{background:var(--edge-soft);color:var(--edge)}
+.head{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.head h2{margin-right:auto}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s;display:grid;gap:10px}
+ol.steps li{counter-increment:s;position:relative;padding-left:40px;min-height:28px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:8px;background:var(--accent-soft);color:var(--accent);font:600 .85rem/28px var(--num);text-align:center}
+code,.mono{font:500 .86em var(--num);background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+.pc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.pc div{background:var(--surface-2);border-radius:10px;padding:10px 12px}
+.pc b{display:block;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}
+.pc .pro b{color:var(--fit)} .pc .con b{color:var(--over)}
+.pc ul{margin:0;padding-left:18px;color:var(--muted);font-size:.9rem}
+.note{font-size:.88rem;color:var(--muted);background:var(--surface-2);border-radius:10px;padding:10px 12px;margin:0}
+.warn{font-size:.88rem;background:var(--edge-soft);color:var(--ink);border-radius:10px;padding:10px 12px;margin:0}
+.warn b{color:var(--edge)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.9rem}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.75rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600}
+.yes{color:var(--fit);font-weight:600} .no{color:var(--over);font-weight:600}
+.toc{display:flex;flex-wrap:wrap;gap:8px}
+.toc a{text-decoration:none;font-size:.88rem;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;color:var(--ink)}
+.toc a:hover{border-color:var(--accent)}
+dl{margin:0;display:grid;gap:10px}
+dt{font-weight:600}
+dd{margin:2px 0 0;color:var(--muted)}
+.small{font-size:.82rem;color:var(--faint)}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <a class="back" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>Back to LineFit</a>
+  <button class="btn" id="themeBtn" type="button"><svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></svg><span id="themeLbl">Dark mode</span></button>
+</div></header>
+
+<main>
+  <section>
+    <h1>Get a free AI key in 2 minutes</h1>
+    <p class="lede">An API key lets LineFit ask an AI to rewrite your points for you. You only do this once. If you'd rather not create a key, use <b>Copy-paste</b> mode in LineFit instead: it works with any AI chat, free, with no key.</p>
+  </section>
+
+  <section class="card pick">
+    <div class="head"><h2>Not sure which to pick? Use Google Gemini.</h2><span class="tag free">Free · No card</span></div>
+    <p style="margin:0">It's free, needs only your <b>personal</b> Google account, and takes about 2 minutes. If Gemini ever says you've hit the free limit, add a <b>Groq</b> key as a backup. That's free too.</p>
+    <div class="toc">
+      <a href="#gemini">Google Gemini (free)</a><a href="#groq">Groq (free)</a><a href="#openrouter">OpenRouter (free)</a><a href="#openai">OpenAI (paid)</a><a href="#anthropic">Anthropic Claude (paid)</a><a href="#add">Add the key to LineFit</a><a href="#help">If something goes wrong</a>
+    </div>
+  </section>
+
+  <section style="display:grid;gap:10px">
+    <h2>Compare at a glance</h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Provider</th><th>Cost</th><th>Card needed?</th><th>Free use</th><th>Your text and privacy</th></tr></thead>
+      <tbody>
+        <tr><td><b>Google Gemini</b></td><td class="yes">Free</td><td class="yes">No</td><td>Plenty for a CV; a daily cap applies</td><td>On the free tier, Google may use what you send to improve its products</td></tr>
+        <tr><td><b>Groq</b></td><td class="yes">Free</td><td class="yes">No</td><td>About 1,000 requests a day on the main Llama model</td><td>Groq says it doesn't keep your prompts by default</td></tr>
+        <tr><td><b>OpenRouter</b></td><td class="yes">Free models</td><td class="yes">No</td><td>About 50 requests a day</td><td>Depends on the model: some free models may log or train on prompts</td></tr>
+        <tr><td><b>OpenAI</b></td><td class="no">Paid</td><td class="no">Yes</td><td>Pay per use, a fraction of a cent per rewrite</td><td>API data isn't used for training by default</td></tr>
+        <tr><td><b>Anthropic Claude</b></td><td class="no">Paid</td><td class="no">Yes</td><td>Pay per use, a fraction of a cent per rewrite</td><td>API data isn't used for training by default</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small">One rewrite in LineFit uses 1 to 3 requests. Limits and terms are set by each provider and change from time to time; they were checked in October 2026.</p>
+  </section>
+
+  <section class="card" id="gemini">
+    <div class="head"><h2>Google Gemini</h2><span class="tag free">Free · Recommended</span></div>
+    <p class="warn"><b>Use your personal Gmail, not your college email.</b> College accounts (like @fms.edu) are managed by the college, and Google AI Studio is often switched off for them, so the key page may not open or the key may not work. Sign in with your personal Google account instead.</p>
+    <ol class="steps">
+      <li>Open <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> and sign in with your <b>personal Gmail</b>. If you're already signed in with your college email, switch accounts first (click your profile picture at the top right).</li>
+      <li>If Google shows terms of service, read and accept them.</li>
+      <li>Click <b>Create API key</b>. If it asks for a project, pick the one it suggests or create a new one.</li>
+      <li>Click <b>Copy</b>. Your key is a long code that starts with <code>AIza</code>.</li>
+      <li>In LineFit, follow <a href="#add">Add the key to LineFit</a> and choose <b>Google Gemini</b>.</li>
+    </ol>
+    <div class="pc">
+      <div class="pro"><b>Good</b><ul><li>Free, no card</li><li>Uses the Google account you already have</li><li>Strong, careful writing</li></ul></div>
+      <div class="con"><b>Watch out</b><ul><li>On the free tier, Google may use your text to improve its products</li><li>Daily cap; resets every day</li></ul></div>
+    </div>
+  </section>
+
+  <section class="card" id="groq">
+    <div class="head"><h2>Groq</h2><span class="tag free">Free · Fast</span></div>
+    <ol class="steps">
+      <li>Open <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a> and sign in. Google, GitHub or email all work; a personal email is safest.</li>
+      <li>Click <b>Create API Key</b> and give it any name, for example <code>LineFit</code>.</li>
+      <li>Copy the key straight away. It starts with <code>gsk_</code> and Groq shows it only once.</li>
+      <li>In LineFit, choose <b>Groq</b> and paste the key.</li>
+    </ol>
+    <div class="pc">
+      <div class="pro"><b>Good</b><ul><li>Free, no card</li><li>Very fast answers</li><li>Doesn't keep your prompts by default</li></ul></div>
+      <div class="con"><b>Watch out</b><ul><li>Runs open models such as Llama, which are a little less polished than Gemini</li><li>Free models can change without notice</li></ul></div>
+    </div>
+  </section>
+
+  <section class="card" id="openrouter">
+    <div class="head"><h2>OpenRouter</h2><span class="tag free">Free models</span></div>
+    <ol class="steps">
+      <li>Open <a href="https://openrouter.ai/keys" target="_blank" rel="noopener">openrouter.ai/keys</a> and sign in.</li>
+      <li>Click <b>Create key</b>, name it, and copy it. It starts with <code>sk-or-</code>.</li>
+      <li>In LineFit, choose <b>OpenRouter</b>, paste the key and click <b>Test key</b>. LineFit picks a free model for you (free models end in <code>:free</code>).</li>
+    </ol>
+    <div class="pc">
+      <div class="pro"><b>Good</b><ul><li>One key for many different models</li><li>Free models cost nothing</li></ul></div>
+      <div class="con"><b>Watch out</b><ul><li>Only about 50 free requests a day</li><li>Some free models are run by companies that may log or train on your prompts. Check the privacy settings in your OpenRouter account.</li></ul></div>
+    </div>
+  </section>
+
+  <section class="card" id="openai">
+    <div class="head"><h2>OpenAI (ChatGPT's maker)</h2><span class="tag paid">Paid</span></div>
+    <p class="warn"><b>Note:</b> a ChatGPT Plus subscription does not include API use. The API is billed separately, so you need to add a little prepaid credit.</p>
+    <ol class="steps">
+      <li>Open <a href="https://platform.openai.com/settings/organization/billing" target="_blank" rel="noopener">platform.openai.com</a>, sign in, and add a small prepaid credit under <b>Billing</b>.</li>
+      <li>Go to <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">API keys</a> and click <b>Create new secret key</b>.</li>
+      <li>Copy the key. It starts with <code>sk-</code>, and you won't see it again.</li>
+      <li>In LineFit, choose <b>OpenAI</b> and paste the key.</li>
+    </ol>
+    <div class="pc">
+      <div class="pro"><b>Good</b><ul><li>Very reliable</li><li>API data isn't used for training by default</li><li>A rewrite costs a fraction of a cent</li></ul></div>
+      <div class="con"><b>Watch out</b><ul><li>Needs a card and prepaid credit</li><li>Set a low spending limit in Billing to be safe</li></ul></div>
+    </div>
+  </section>
+
+  <section class="card" id="anthropic">
+    <div class="head"><h2>Anthropic Claude</h2><span class="tag paid">Paid</span></div>
+    <p class="warn"><b>Note:</b> a Claude Pro subscription does not include API use. The API is billed separately.</p>
+    <ol class="steps">
+      <li>Open <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>, sign in, and buy a small amount of credit under <b>Billing</b>.</li>
+      <li>Go to <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">API keys</a> and click <b>Create key</b>.</li>
+      <li>Copy the key. It starts with <code>sk-ant-</code>, and you won't see it again.</li>
+      <li>In LineFit, choose <b>Anthropic Claude</b> and paste the key.</li>
+    </ol>
+    <div class="pc">
+      <div class="pro"><b>Good</b><ul><li>Excellent, careful writing</li><li>API data isn't used for training by default</li><li>A rewrite costs a fraction of a cent</li></ul></div>
+      <div class="con"><b>Watch out</b><ul><li>Needs a card and prepaid credit</li></ul></div>
+    </div>
+  </section>
+
+  <section class="card" id="add">
+    <div class="head"><h2>Add the key to LineFit</h2></div>
+    <ol class="steps">
+      <li>Open LineFit and click <b>Set up AI</b> at the top right.</li>
+      <li>Choose your provider, for example <b>Google Gemini</b>.</li>
+      <li>Paste your key and click <b>Test key</b>. A green "Key works" message means you're done.</li>
+      <li>Optional: tick <b>Remember my key on this device</b> so you don't have to paste it again. Leave it unticked on a shared or college computer.</li>
+      <li>Click <b>Enlarge</b>, <b>Shrink</b> or <b>Improve</b> on any point, then <b>Write options</b>.</li>
+    </ol>
+  </section>
+
+  <section class="card" id="help">
+    <div class="head"><h2>If something goes wrong</h2></div>
+    <dl>
+      <div><dt>The Gemini key page won't open, says "not available", or the key doesn't work</dt><dd>You're probably signed in with your college email. Sign out, or switch to your personal Gmail, and create the key again.</dd></div>
+      <div><dt>"The provider rejected this key"</dt><dd>Copy the key again, without spaces, and paste it. If it still fails, create a new key.</dd></div>
+      <div><dt>"The provider's free limit was reached"</dt><dd>Wait a minute and try again, or switch to another free provider (for example Groq) in Set up AI.</dd></div>
+      <div><dt>"That model is not available on this key"</dt><dd>Click <b>Test key</b>; LineFit picks a model that works.</dd></div>
+      <div><dt>"Couldn't reach the provider"</dt><dd>Check your internet, turn off any VPN or ad blocker for this site, or try another provider.</dd></div>
+    </dl>
+  </section>
+
+  <section class="card">
+    <div class="head"><h2>Keep your key safe</h2></div>
+    <ul style="margin:0;padding-left:20px;color:var(--muted)">
+      <li>Treat your key like a password. Never share it or post it anywhere.</li>
+      <li>LineFit never stores your key on its site. It stays in your own browser, and only if you tick "Remember my key".</li>
+      <li>Your points go straight from your browser to the provider you choose. Don't send anything confidential, such as client names under NDA.</li>
+      <li>If a key leaks, delete it on the provider's key page and create a new one.</li>
+    </ul>
+    <p class="note"><b>Disclaimer:</b> LineFit is not affiliated with Google, Groq, OpenRouter, OpenAI or Anthropic. Free limits, prices and data policies are set by each provider and can change at any time; check their current terms before you use them. AI rewrites can contain mistakes. Check every word and number before it goes on your CV.</p>
+  </section>
+</main>
+<script>
+(function(){
+  var ICON={light:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',dark:'<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>'};
+  var root=document.documentElement,KEY="linefit:theme",saved=null;
+  try{saved=localStorage.getItem(KEY)}catch(e){}
+  if(saved==="light"||saved==="dark")root.setAttribute("data-theme",saved);
+  function current(){var t=root.getAttribute("data-theme");if(t)return t;return window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}
+  function paint(){var c=current(),next=c==="dark"?"light":"dark";document.getElementById("themeIcon").innerHTML=ICON[next];document.getElementById("themeLbl").textContent=next==="dark"?"Dark mode":"Light mode";document.getElementById("themeBtn").setAttribute("aria-label","Switch to "+next+" mode")}
+  document.getElementById("themeBtn").addEventListener("click",function(){var next=current()==="dark"?"light":"dark";root.setAttribute("data-theme",next);try{localStorage.setItem(KEY,next)}catch(e){}paint()});
+  if(window.matchMedia)matchMedia("(prefers-color-scheme: dark)").addEventListener("change",paint);
+  paint();
+})();
+</script>
+</body>
+</html>
