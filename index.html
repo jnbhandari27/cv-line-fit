@@ -754,7 +754,7 @@ details.how li{color:var(--muted);max-width:76ch;font-size:.86rem;margin:4px 0}
   // so "fits" always means the measured width, never the AI's own estimate.
   var PROVIDERS={
     claudeacct:{name:"Claude (your Claude account)",kind:"sample",nokey:true},
-    gemini:{name:"Google Gemini (free key)",kind:"gemini",keyUrl:"https://aistudio.google.com/apikey",keyHint:"Free from Google AI Studio · sign in with your personal Gmail",def:"gemini-2.5-flash",prefer:[/^gemini-[\d.]+-flash$/,/flash(?!.*(lite|image|tts|live|audio))/,/flash/]},
+    gemini:{name:"Google Gemini (free key)",kind:"gemini",keyUrl:"https://aistudio.google.com/apikey",keyHint:"Free from Google AI Studio · sign in with your personal Gmail",def:"gemini-flash-latest",prefer:[/^gemini-flash-latest$/]},
     groq:{name:"Groq: Llama and others (free key)",kind:"openai",base:"https://api.groq.com/openai/v1",keyUrl:"https://console.groq.com/keys",keyHint:"Free from the Groq console",def:"llama-3.3-70b-versatile",prefer:[/llama-3\.3-70b/,/llama-4/,/70b/,/llama/]},
     openrouter:{name:"OpenRouter: free models (free key)",kind:"openai",base:"https://openrouter.ai/api/v1",keyUrl:"https://openrouter.ai/keys",keyHint:"Free; only models ending in :free cost nothing",def:"meta-llama/llama-3.3-70b-instruct:free",freeOnly:true,prefer:[/llama-3\.3-70b.*:free$/,/llama.*:free$/,/:free$/]},
     openai:{name:"OpenAI (paid key)",kind:"openai",base:"https://api.openai.com/v1",keyUrl:"https://platform.openai.com/api-keys",keyHint:"Paid API billing, separate from ChatGPT Plus",def:"gpt-4o-mini",prefer:[/^gpt-4o-mini$/,/^gpt-4\.1-mini$/,/mini$/]},
@@ -816,14 +816,37 @@ details.how li{color:var(--muted);max-width:76ch;font-size:.86rem;margin:4px 0}
   $("aiShowKey").addEventListener("click",function(){var k=$("aiKey");k.type=k.type==="password"?"text":"password";$("aiShowKey").textContent=k.type==="password"?"Show":"Hide"});
   $("aiTest").addEventListener("click",function(){
     var msg=$("aiTestMsg");msg.className="testmsg";msg.textContent="Checking…";
+    var P=aiProvider(),count=0;
     listModels().then(function(ids){
-      var P=aiProvider();fillModels(ids);
+      count=ids.length;fillModels(ids);
       if(!ai.models[ai.provider]||ids.indexOf(aiModel())<0){var pick=pickModel(ids,P);if(pick){ai.models[ai.provider]=pick;$("aiModel").value=pick;save()}}
-      msg.className="testmsg ok";msg.textContent="Key works · "+ids.length+" model"+(ids.length===1?"":"s")+" available · using "+aiModel();
+      msg.textContent="Key accepted · checking the model…";
+      return callLLM("Reply with the single word OK.");
+    }).then(function(){
+      msg.className="testmsg ok";msg.textContent="Key works · using "+aiModel();$("aiModel").value=aiModel();aiDot();
     },function(err){msg.className="testmsg bad";msg.textContent=errText(err)});
   });
   function fillModels(ids){$("aiModels").innerHTML=ids.slice(0,300).map(function(id){return '<option value="'+esc(id)+'">'}).join("")}
-  function pickModel(ids,P){for(var i=0;i<(P.prefer||[]).length;i++){var m=ids.filter(function(id){return P.prefer[i].test(id)});if(m.length)return m.sort(function(a,b){return a.length-b.length})[0]}return ids[0]}
+  // Models get retired over time (and can still be listed after they stop working), so rank what the key offers:
+  // preferred names first, then the newest suitable version, and never a model that has already failed.
+  var failedModels={};
+  function verOf(id){var m=String(id).match(/(\d+(?:\.\d+)?)/);return m?parseFloat(m[1]):0}
+  function rankModels(ids,P){
+    var bad=/(lite|nano|image|tts|live|audio|embed|vision|thinking|exp|learnlm|gemma|aqa|robotics|computer|pro)/i;
+    var pool=ids.filter(function(id){return !failedModels[ai.provider+"|"+id]});
+    var out=[];
+    (P.prefer||[]).forEach(function(re){pool.forEach(function(id){if(re.test(id)&&out.indexOf(id)<0)out.push(id)})});
+    var rest=pool.filter(function(id){return out.indexOf(id)<0});
+    if(P.kind==="gemini"){
+      var flash=rest.filter(function(id){return /flash/i.test(id)&&!bad.test(id)});
+      flash.sort(function(a,b){var pa=/preview/.test(a)?1:0,pb=/preview/.test(b)?1:0;return verOf(b)-verOf(a)||pa-pb||a.length-b.length});
+      out=out.concat(flash,rest.filter(function(id){return /flash/i.test(id)&&flash.indexOf(id)<0&&!/image|tts|live|audio|embed/i.test(id)}));
+    }else{
+      out=out.concat(rest.sort(function(a,b){return verOf(b)-verOf(a)}));
+    }
+    return out;
+  }
+  function pickModel(ids,P){return rankModels(ids,P)[0]}
 
   // ---- provider calls (straight from this browser to the provider) ----
   function aiErr(code,msg){var e=new Error(msg||code);e.code=code;return e}
@@ -832,7 +855,7 @@ details.how li{color:var(--muted);max-width:76ch;font-size:.86rem;margin:4px 0}
     switch(e&&e.code){
       case "nokey":return "Add your "+P.name.replace(/ \(.*\)/,"")+" key in AI settings first.";
       case "key":return "The provider rejected this key. Check it in AI settings.";
-      case "model":return "That model is not available on this key. Click Test key to pick one that is.";
+      case "model":return "No working model was found for this key. Click Test key, or type a current model name (for Gemini, e.g. gemini-flash-latest) in AI settings.";
       case "rate":return "The provider's free limit was reached. Wait a minute, or switch provider in AI settings.";
       case "network":return "Couldn't reach "+P.name.replace(/ \(.*\)/,"")+". Check your connection, or try another provider.";
       case "abort":return "Stopped.";
@@ -890,7 +913,12 @@ details.how li{color:var(--muted);max-width:76ch;font-size:.86rem;margin:4px 0}
     }
     return p.then(function(t){if(!t||!t.trim())throw aiErr("empty");return t},function(e){
       // A retired default model: find a current one once, then retry
-      if(e.code==="model"&&!callLLM._retried){callLLM._retried=true;return listModels().then(function(ids){var m=pickModel(ids,P);if(!m)throw e;ai.models[ai.provider]=m;save();return callLLM(prompt,signal)}).finally(function(){callLLM._retried=false})}
+      if(e.code==="model"&&(callLLM._tries||0)<3){
+        failedModels[ai.provider+"|"+model]=1;callLLM._tries=(callLLM._tries||0)+1;
+        return listModels().then(function(ids){var m=pickModel(ids,P);if(!m)throw e;ai.models[ai.provider]=m;save();if($("aiModel"))$("aiModel").value=m;return callLLM(prompt,signal)})
+          .then(function(t){callLLM._tries=0;return t},function(err){callLLM._tries=0;throw err});
+      }
+      callLLM._tries=0;
       throw e;
     });
   }
